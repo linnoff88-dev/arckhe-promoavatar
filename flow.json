@@ -1,0 +1,149 @@
+{
+  "nome": "promoavatar",
+  "prefixo": "A",
+  "versao_def": 1,
+  "alvos": {
+    "pessoacomum": {
+      "canal": "lives2",
+      "gatilho": "Você usa IA do jeito preguiçoso; dá pra fazer muito melhor com truques simples."
+    },
+    "jovens": {
+      "canal": "lives22",
+      "gatilho": "Você pode começar uma profissão que ainda está nascendo."
+    },
+    "profissionais": {
+      "canal": "lives23",
+      "gatilho": "Não abandone sua profissão. Aprenda a ampliá-la com IA."
+    },
+    "mulheres": {
+      "canal": "lives4",
+      "gatilho": "Use a IA para conquistar autonomia, produtividade e novas oportunidades."
+    },
+    "empreendedores": {
+      "canal": "lives24",
+      "gatilho": "Transforme IA em redução de custos, vendas e novos negócios."
+    },
+    "tecnicos": {
+      "canal": "lives6",
+      "gatilho": "Pare de apenas testar ferramentas. Aprenda a construir sistemas e agentes."
+    },
+    "40mais": {
+      "canal": "lives7",
+      "gatilho": "Sua experiência vale mais quando é multiplicada pela IA."
+    },
+    "60mais": {
+      "canal": "lives8",
+      "gatilho": "A IA pode transformar sua experiência de vida em conhecimento, renda e propósito."
+    },
+    "educadores": {
+      "canal": "lives9",
+      "gatilho": "Você não vai ser substituído pela IA — mas pode ser o professor que ensina com ela."
+    },
+    "criadores": {
+      "canal": "lives11",
+      "gatilho": "Pare de pagar ferramenta cara. Monte sua própria fábrica de conteúdo com IA."
+    },
+    "recolocacao": {
+      "canal": "lives3",
+      "gatilho": "Perdeu o emprego ou quer mudar de área? A IA pode ser o atalho do seu recomeço."
+    },
+    "familia": {
+      "canal": "lives31",
+      "gatilho": "As formações de hoje não preparam seu filho para o mundo que vem — você pode formá-lo para o próximo momento da IA."
+    }
+  },
+  "fases": [
+    {
+      "id": "texto",
+      "escopo": "fluxo",
+      "fila": "texto",
+      "kind": "agent",
+      "tarefa": "fluxo-agente",
+      "prompt": "prompts/fase1-texto.md",
+      "max_tentativas": 2,
+      "pausa_apos": true,
+      "perfil": {
+        "modelo": "opus"
+      }
+    },
+    {
+      "id": "gerar",
+      "escopo": "alvo",
+      "fila": "io",
+      "kind": "function",
+      "tarefa": "heygen.gerar",
+      "max_tentativas": 2,
+      "espera": {
+        "intervalo": 60,
+        "timeout": 3600
+      },
+      "opcional": "api"
+    },
+    {
+      "id": "gerar-creditos",
+      "escopo": "alvo",
+      "fila": "io",
+      "kind": "function",
+      "tarefa": "heygen.gerar-creditos",
+      "opcional": "creditos",
+      "max_tentativas": 2,
+      "espera": {
+        "intervalo": 60,
+        "timeout": 3600
+      }
+    },
+    {
+      "id": "estudio",
+      "escopo": "alvo",
+      "fila": "navegador",
+      "kind": "function",
+      "tarefa": "heygen.estudio",
+      "opcional": "estudio",
+      "max_tentativas": 2,
+      "espera": {
+        "intervalo": 60,
+        "timeout": 3600
+      }
+    },
+    {
+      "id": "navega-avatar",
+      "escopo": "alvo",
+      "fila": "navegador",
+      "kind": "agent",
+      "tarefa": "fluxo-navegador",
+      "prompt": "prompts/fase-navega-avatar.md",
+      "opcional": "navega",
+      "max_tentativas": 2
+    },
+    {
+      "id": "baixar",
+      "escopo": "alvo",
+      "fila": "io",
+      "kind": "function",
+      "tarefa": "heygen.baixar",
+      "max_tentativas": 3,
+      "espera": {
+        "intervalo": 300,
+        "timeout": 144000
+      },
+      "pausa_apos": true
+    },
+    {
+      "id": "reel",
+      "escopo": "alvo",
+      "fila": "render",
+      "kind": "function",
+      "tarefa": "reel.montar",
+      "max_tentativas": 2,
+      "espera": {
+        "intervalo": 120,
+        "timeout": 10800
+      }
+    }
+  ],
+  "avatar_id": "fda4a6217ea3496a97c96339b8abb902",
+  "voice_id": "29583ec22d284e52b1e07f3ba9ef9d1f",
+  "engine": "avatar_iii",
+  "templates_dir": "templates",
+  "template": "empilhado-capa"
+}
